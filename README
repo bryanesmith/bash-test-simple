@@ -1,0 +1,78 @@
+===== ABOUT
+Base Test Simple very simple testing framework for bash. Features hooks, formatted output and summaries for tests arranged into test suites. 
+
+===== INSTALLATION
+Download and move bash_test_simple into a directory in your $PATH variable so that it will be accessible to any script.
+
+===== HOW TO USE
+
+The following examples come from the test script: sample.tsh
+
+To use Bash Test Simple, add the following near the top of your script:
+
+|  source bash_test_simple
+
+You can then create suites of tests:
+
+|  suite 'My first test suite <3'
+|    run test_math
+|    run test_strings
+|  end
+|
+|  suite 'My second test suite ^^'
+|    run test_bash
+|  end
+
+Note that you must define a bash function for each of these tests _before_ the suite is defined. E.g., the following would appear *before* the suite that contains it:
+
+|  test_math() {
+|    warn "test $(( 1 + 1 )) -eq 2" 'Expecting 1 + 1 = 2'
+|    warn "test $(( 1 + 1 )) -eq 3" 'Expecting 1 + 1 = 3'
+|    warn "test $(( 100 % 3 )) -eq 2" 'Expecting 100 % 3 = 2'
+|    assert "test $(( 6 / 2 )) -eq 3" 'Expecting 6 / 2 = 3'
+|    assert "test $(( 6 / 2 )) -eq 2" 'Expecting 6 / 2 = 2'
+|    warn 'false' 'Test should have failed already'
+|  }
+
+Note that I added assertions and warnings. Both will be included in the report, but a failed assertion will cause the current test to stop running (though the current suite will continue):
+
+|  ================================================
+|   Starting suite: My first test suite <3
+|  ================================================
+|
+|  ------------------------------------------------
+|   Test:                                test_math 
+|  ------------------------------------------------
+|  (Optional hook: test started)
+|
+|    > WARNING: Expecting 1 + 1 = 3 (exit code: 1)
+|    > (Optional hook: warning)
+|    > WARNING: Expecting 100 % 3 = 2 (exit code: 1)
+|    > (Optional hook: warning)
+|    > ERROR: Expecting 6 / 2 = 2 (exit code: 1)
+|
+|  FAILED (Exit code: 1)
+|  (Optional hook: test failed)
+|  
+|  [... more test output]
+
+===== API
+  * suite 'NAME'; [...]; end
+      This contains one or more tests to execute.
+  * warn "condition" ['Message']
+      Execute the condition, and warn the user if not exit normally.
+  * assert "condition" ['Message']
+      Execute the condition, and warn the user if not exit normally.
+  * when_suite_starts
+      Hook. Invoked whenever any suite starts.
+  * when_suite_ends
+      Hook. Invoked whenever any suite ends.
+  * when_warns
+      Hook. Invoked whenever a warning is issued.
+  * when_test_starts
+      Hook. Invoked whenever a test starts.
+  * when_test_passes
+      Hook. Invoked whenever a test passes.
+  * when_test_fails
+      Hook. Invoked whenever a test fails.
+
