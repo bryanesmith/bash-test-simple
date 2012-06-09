@@ -1,0 +1,70 @@
+
+================================================
+ Starting suite: My first test suite <3
+================================================
+
+(Optional hook: suite has started)
+
+------------------------------------------------
+ Test:                                test_math 
+------------------------------------------------
+(Optional hook: test started)
+
+  > WARNING: Expecting 1 + 1 = 3 (exit code: 1)
+  > (Optional hook: warning)
+  > WARNING: Expecting 100 % 3 = 2 (exit code: 1)
+  > (Optional hook: warning)
+  > ERROR: Expecting 6 / 2 = 2 (exit code: 1)
+
+FAILED (Exit code: 1)
+(Optional hook: test failed)
+
+------------------------------------------------
+ Test:                             test_strings 
+------------------------------------------------
+(Optional hook: test started)
+
+  > WARNING: Expecting abe = licoln (exit code: 1)
+  > (Optional hook: warning)
+  > ERROR: Expecting abe = licoln (exit code: 1)
+
+FAILED (Exit code: 1)
+(Optional hook: test failed)
+
+Finished suite.
+(Optional hook: suite has finished)
+
+         /===========================\         
+         |  Tests      |          2  |         
+         |  Passed     |          0  |         
+         |  Failed     |          2  |         
+         |  Warnings   |          3  |         
+         \===========================/         
+
+
+================================================
+ Starting suite: My second test suite ^^
+================================================
+
+(Optional hook: suite has started)
+
+------------------------------------------------
+ Test:                                test_bash 
+------------------------------------------------
+(Optional hook: test started)
+
+  > (Output of ls would be shown here)
+
+PASSED
+(Optional hook: test passed)
+
+Finished suite.
+(Optional hook: suite has finished)
+
+         /===========================\         
+         |  Tests      |          1  |         
+         |  Passed     |          1  |         
+         |  Failed     |          0  |         
+         |  Warnings   |          0  |         
+         \===========================/         
+
